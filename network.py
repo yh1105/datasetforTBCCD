@@ -233,6 +233,7 @@ def conv_step(nodes, children, feature_size, w_t, w_r, w_l, b_conv):
             result = tf.reshape(tree_tensor, (x, y, feature_size))
             coef = tf.reshape(coef, (x, y, 3))
             result = tf.matmul(result, coef, transpose_a=True)
+            result=tf.transpose(result,[0,2,1])
             result = tf.reshape(result, (batch_size, max_tree_size, 3, feature_size))
 
             result = tf.tensordot(result, weights, [[2, 3], [0, 1]])
